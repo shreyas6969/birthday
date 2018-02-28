@@ -1,6 +1,15 @@
 package com.cerner.birthday.demo;
 
 import java.io.IOException;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +33,9 @@ public class EmailContentController {
 
 	@Autowired
 	private FetchImage fetchImage;
+	
+	
+
 
 	@GetMapping("/email/{eventType}/name/{firstName}")
 	public String getEmailContent(@PathVariable(name = "eventType") String eventType,
@@ -31,7 +43,6 @@ public class EmailContentController {
 
 		String imgSrc = "<img src='data:image/jpg;base64," + fetchImage.getImageFromSharedLocation() + "'/>";
 		System.out.println(imgSrc);
-
 		return html.replace("#imageReplace#", imgSrc).replace("#replaceName", firstName);
 
 	}
