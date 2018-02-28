@@ -29,7 +29,8 @@ public class EmailContentController {
 	public String getEmailContent(@PathVariable(name = "eventType") String eventType,
 			@PathVariable(name = "firstName") String firstName) throws JsonProcessingException, IOException {
 
-		String imgSrc = "<img src='" + fetchImage.fetchImage(eventType) + "'/>";
+		String imgSrc = "<img src='data:image/jpg;base64," + fetchImage.getImageFromSharedLocation() + "'/>";
+		System.out.println(imgSrc);
 
 		return html.replace("#imageReplace#", imgSrc).replace("#replaceName", firstName);
 
